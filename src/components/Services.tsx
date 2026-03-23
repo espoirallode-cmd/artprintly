@@ -8,7 +8,7 @@ const Services = () => {
     <section className="bg-black py-24 md:py-32" ref={sectionRef}>
       <div className="container mx-auto px-6 max-w-[900px] text-center">
         <h2 className={`font-outfit font-bold text-white text-3xl md:text-5xl mb-6 transition-all duration-1000 ${sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          Vous avez un projet en tête ?
+          Vous avez un projet <span className="whitespace-nowrap lg:whitespace-normal">en tête ?</span>
         </h2>
         <p className={`font-montserrat text-brand-white/50 text-base md:text-lg mb-16 transition-all duration-1000 delay-300 ${sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           Ce site a été entièrement conçu sur mesure.<br className="hidden md:block" />
