@@ -5,7 +5,7 @@ const Hero = () => {
   const parallaxRef = useParallax(0.15);
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden flex items-center bg-brand-black pt-20">
+    <section className="relative min-h-[90vh] overflow-hidden flex items-start lg:items-center bg-brand-black pt-32 lg:pt-20 pb-12 lg:pb-0">
       {/* Mobile Background Image Layer (Positioned on the right, like desktop) */}
       <div className="absolute top-0 right-0 w-[75%] md:w-[60%] h-full lg:hidden z-0">
         <img 
