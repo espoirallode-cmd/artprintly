@@ -26,10 +26,9 @@ const Hero = () => {
           {/* Left Column: Text Content */}
           <div className={`relative z-30 animate-in ${isVisible ? "visible" : ""} text-left`}>
             <p 
-              className="mb-2 tracking-[0.03em] text-brand-green whitespace-normal lg:whitespace-nowrap"
+              className="mb-2 tracking-[0.03em] text-brand-green whitespace-normal lg:whitespace-nowrap text-[clamp(1.5rem,4vw,2.5rem)] md:text-[clamp(3rem,5vw,5.5rem)]"
               style={{ 
                 fontFamily: "'Cookie', cursive", 
-                fontSize: "clamp(1.5rem, 4vw, 2.5rem)", 
                 fontWeight: 400,
                 transitionDelay: "0ms"
               }}
@@ -37,8 +36,7 @@ const Hero = () => {
               L'art qui sublime chaque mur.
             </p>
             <h1
-              className="font-outfit font-bold text-brand-white leading-[1.05] tracking-tight"
-              style={{ fontSize: "clamp(1.8rem, 5vw + 0.5rem, 4.5rem)" }}
+              className="font-outfit font-bold text-brand-white leading-[1.05] tracking-tight text-[clamp(1.8rem,5vw+0.5rem,4.5rem)] md:text-[clamp(2.5rem,6vw+1rem,5.5rem)]"
             >
               <span className="whitespace-nowrap">363 Motifs Premium</span>
               <br />
