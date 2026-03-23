@@ -6,15 +6,16 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden flex items-center bg-brand-black pt-20">
-      {/* Mobile Background Image Layer */}
-      <div className="absolute inset-0 lg:hidden z-0">
+      {/* Mobile Background Image Layer (Positioned on the right, like desktop) */}
+      <div className="absolute top-0 right-0 w-[75%] md:w-[60%] h-full lg:hidden z-0">
         <img 
           src="/MTP_25.jpg" 
           alt="Chambre décoration ArtPrintly" 
-          className="w-full h-full object-cover object-top opacity-30"
+          className="w-full h-full object-cover object-right opacity-40 md:opacity-50"
         />
-        {/* Gradient overlay to ensure text readability on mobile */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/50 to-brand-black pointer-events-none" />
+        {/* Gradient overlay to ensure text readability on mobile: Fade from black on left to transparent on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Background decoration */}
