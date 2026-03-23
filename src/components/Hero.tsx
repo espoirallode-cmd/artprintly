@@ -6,8 +6,19 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden flex items-center bg-brand-black pt-20">
+      {/* Mobile Background Image Layer */}
+      <div className="absolute inset-0 lg:hidden z-0">
+        <img 
+          src="/MTP_25.jpg" 
+          alt="Chambre décoration ArtPrintly" 
+          className="w-full h-full object-cover object-top opacity-30"
+        />
+        {/* Gradient overlay to ensure text readability on mobile */}
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/50 to-brand-black pointer-events-none" />
+      </div>
+
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-brand-green/20 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-brand-green/20 to-transparent pointer-events-none hidden lg:block" />
 
       <div className="container mx-auto px-6 relative z-20" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -51,8 +62,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column: Hero Image Replacement */}
-          <div className={`relative animate-in h-full ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "200ms" }}>
+          {/* Right Column: Hero Image Replacement (Desktop) */}
+          <div className={`hidden lg:block relative animate-in h-full ${isVisible ? "visible" : ""}`} style={{ transitionDelay: "200ms" }}>
             <div className="relative w-full lg:h-full flex items-center justify-start">
               <img 
                 src="/MTP_25.jpg" 
