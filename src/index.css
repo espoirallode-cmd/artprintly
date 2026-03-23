@@ -16,18 +16,18 @@
     --secondary-foreground: 0 0% 0%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
-    --accent: 98 42% 32%;
+    --accent: 150 73% 46%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 98 42% 32%;
+    --ring: 150 73% 46%;
     --radius: 0.75rem;
 
     --brand-black: 0 0% 0%;
     --brand-white: 0 0% 100%;
-    --brand-green: 98 42% 32%;
+    --brand-green: 150 73% 46%;
     --brand-dark: 0 0% 7%;
   }
 }
@@ -92,8 +92,8 @@
 }
 
 @keyframes pulse-green {
-  0%, 100% { box-shadow: 0 0 0 0 hsla(98, 42%, 32%, 0.5); }
-  50% { box-shadow: 0 0 0 12px hsla(98, 42%, 32%, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 hsla(150, 73%, 46%, 0.5); }
+  50% { box-shadow: 0 0 0 12px hsla(150, 73%, 46%, 0); }
 }
 /* Modern Premium Offer Card Effect */
 .offer-outer {

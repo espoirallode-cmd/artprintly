@@ -35,7 +35,7 @@ const StatItem = ({ icon, end, label, suffix, isVisible, delay }: {
       style={{ transitionDelay: `${delay}ms` }}
     >
       {/* Icon Container with Glow following the reference */}
-      <div className="w-20 h-20 mx-auto mb-10 rounded-[2rem] bg-brand-green/[0.05] border border-brand-green/20 flex items-center justify-center relative transition-all duration-700 group-hover:scale-110 shadow-[0_0_30px_rgba(79,119,45,0.1)] group-hover:shadow-[0_0_40px_rgba(79,119,45,0.3)]">
+      <div className="w-20 h-20 mx-auto mb-10 rounded-[2rem] bg-brand-green/[0.05] border border-brand-green/20 flex items-center justify-center relative transition-all duration-700 group-hover:scale-110 shadow-[0_0_30px_rgba(32,201,117,0.1)] group-hover:shadow-[0_0_40px_rgba(32,201,117,0.3)]">
         <i className={`fa-solid ${icon} text-brand-green text-3xl z-10 transition-transform duration-700`} aria-hidden="true" />
       </div>
 

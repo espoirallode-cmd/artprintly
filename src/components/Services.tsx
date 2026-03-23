@@ -24,8 +24,8 @@ const Services = () => {
             className={`group relative bg-white/[0.05] backdrop-blur-xl border border-white/10 p-9 rounded-[2rem] transition-all duration-1000 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] ${cardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-[#4f772d]/10 rounded-2xl flex items-center justify-center mb-8 border border-[#4f772d]/20 shadow-[0_0_30px_rgba(79,119,45,0.15)] group-hover:scale-110 transition-transform duration-500">
-                <i className="fa-solid fa-laptop-code text-[#4f772d] text-3xl" aria-hidden="true" />
+              <div className="w-16 h-16 bg-[#20c975]/10 rounded-2xl flex items-center justify-center mb-8 border border-[#20c975]/20 shadow-[0_0_30px_rgba(32,201,117,0.15)] group-hover:scale-110 transition-transform duration-500">
+                <i className="fa-solid fa-laptop-code text-[#20c975] text-2xl" aria-hidden="true" />
               </div>
               <h3 className="font-outfit font-bold text-white text-2xl mb-4 tracking-tight">Création de Site Web</h3>
               <p className="font-montserrat text-brand-white/50 text-[15px] leading-relaxed">
@@ -40,8 +40,8 @@ const Services = () => {
             className={`group relative bg-white/[0.05] backdrop-blur-xl border border-white/10 p-9 rounded-[2rem] transition-all duration-1000 delay-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] ${cardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-[#4f772d]/10 rounded-2xl flex items-center justify-center mb-8 border border-[#4f772d]/20 shadow-[0_0_30px_rgba(79,119,45,0.15)] group-hover:scale-110 transition-transform duration-500">
-                <i className="fa-solid fa-pen-nib text-[#4f772d] text-3xl" aria-hidden="true" />
+              <div className="w-16 h-16 bg-[#20c975]/10 rounded-2xl flex items-center justify-center mb-8 border border-[#20c975]/20 shadow-[0_0_30px_rgba(32,201,117,0.15)] group-hover:scale-110 transition-transform duration-500">
+                <i className="fa-solid fa-pen-nib text-[#20c975] text-3xl" aria-hidden="true" />
               </div>
               <h3 className="font-outfit font-bold text-white text-2xl mb-4 tracking-tight">Design Graphique & Identité Visuelle</h3>
               <p className="font-montserrat text-brand-white/50 text-[15px] leading-relaxed">
@@ -62,7 +62,7 @@ const Services = () => {
             Discutons de votre projet sur WhatsApp
           </a>
           <p className="font-montserrat text-brand-white/30 text-xs flex items-center gap-2">
-            <i className="fa-solid fa-clock text-[#4f772d]" aria-hidden="true" />
+            <i className="fa-solid fa-clock text-[#20c975]" aria-hidden="true" />
             Réponse garantie sous 24h
           </p>
         </div>
