@@ -5,7 +5,7 @@ const items = [
   { icon: "fa-file-image", q: "Quels formats de fichiers sont inclus ?", a: "Tous les motifs sont fournis en haute résolution (300 DPI minimum), compatibles avec les formats d'impression standards : A3, A4, A5 et 50x70cm." },
   { icon: "fa-download", q: "Comment vais-je recevoir mon fichier ?", a: "Après validation de votre paiement, un lien de téléchargement vous est immédiatement accessible. Votre fichier ZIP contient l'ensemble des 363 motifs organisés par thématique." },
   { icon: "fa-shield-halved", q: "Le paiement est-il sécurisé ?", a: "Oui, le paiement est entièrement sécurisé via notre plateforme partenaire de confiance. Vos données bancaires sont protégées." },
-  { icon: "fa-scale-balanced", q: "Puis-je utiliser ces motifs commercialement ?", a: "Les motifs sont destinés à un usage personnel et décoratif. Pour tout usage commercial, contactez-nous pour une licence adaptée." },
+  { icon: "fa-scale-balanced", q: "Puis-je utiliser ces motifs commercialement ?", a: "Oui, nos motifs sont libres de droits et utilisables à des fins personnelles ET commerciales. Imprimez, revendez, décorez sans restriction." },
 ];
 
 const FAQ = () => {
