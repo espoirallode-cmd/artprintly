@@ -1,7 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
 const features = [
-  "363 motifs botaniques haute résolution",
+  "363 motifs haute résolution",
   "13 packs thématiques distincts et organisés",
   "Fichiers optimisés pour l'impression",
   "Compatible tous formats (A3, A4, A5, 50x70)",
