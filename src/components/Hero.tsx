@@ -42,7 +42,7 @@ const Hero = () => {
             >
               <span className="whitespace-nowrap">363 Motifs Premium</span>
               <br />
-              <span className="text-brand-green">Prêts à Imprimer</span> chez Vous
+              <span className="text-brand-green">Prêts à Imprimer</span> <span className="whitespace-nowrap lg:whitespace-normal">chez Vous</span>
             </h1>
             <p className="mt-4 md:mt-8 font-montserrat text-brand-white/70 text-sm md:text-xl max-w-lg leading-relaxed">
               Transformez vos murs en œuvres d'art avec notre collection exclusive de motifs haute résolution. Téléchargement instantané.
