@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
 const items = [
+  { icon: "fa-shield-heart", q: "J'ai peur de payer et de ne rien recevoir, que faire ?", a: "Votre inquiétude est tout à fait légitime et nous la respectons. Le téléchargement est 100% automatique dès la validation du paiement — aucune attente, aucune intervention humaine nécessaire. En cas de problème, notre support WhatsApp répond sous 24h pour vous aider." },
   { icon: "fa-file-image", q: "Quels formats de fichiers sont inclus ?", a: "Tous les motifs sont fournis en haute résolution (300 DPI minimum), compatibles avec les formats d'impression standards : A3, A4, A5 et 50x70cm." },
   { icon: "fa-download", q: "Comment vais-je recevoir mon fichier ?", a: "Après validation de votre paiement, un lien de téléchargement vous est immédiatement accessible. Votre fichier ZIP contient l'ensemble des 363 motifs organisés par thématique." },
   { icon: "fa-shield-halved", q: "Le paiement est-il sécurisé ?", a: "Oui, le paiement est entièrement sécurisé via notre plateforme partenaire de confiance. Vos données bancaires sont protégées." },
