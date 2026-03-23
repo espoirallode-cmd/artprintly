@@ -26,7 +26,7 @@ const Hero = () => {
           {/* Left Column: Text Content */}
           <div className={`relative z-30 animate-in ${isVisible ? "visible" : ""} text-left`}>
             <p 
-              className="mb-2 tracking-[0.03em] text-brand-green whitespace-nowrap"
+              className="mb-2 tracking-[0.03em] text-brand-green whitespace-normal lg:whitespace-nowrap"
               style={{ 
                 fontFamily: "'Cookie', cursive", 
                 fontSize: "clamp(1.5rem, 4vw, 2.5rem)", 
