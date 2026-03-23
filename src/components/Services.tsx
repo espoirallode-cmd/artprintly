@@ -56,7 +56,7 @@ const Services = () => {
             href="https://wa.me/22901000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="pulse-whatsapp flex items-center gap-3 bg-white/[0.05] backdrop-blur-xl hover:bg-white/[0.1] text-white font-montserrat font-semibold px-8 py-4 rounded-full transition-all active:scale-95 border border-white/20 shadow-2xl"
+            className="pulse-whatsapp flex items-center justify-center whitespace-nowrap gap-2 md:gap-3 bg-white/[0.05] backdrop-blur-xl hover:bg-white/[0.1] text-white font-montserrat font-semibold text-[12px] sm:text-sm md:text-base px-5 md:px-8 py-3 md:py-4 rounded-full transition-all active:scale-95 border border-white/20 shadow-2xl max-w-full"
           >
             <i className="fa-brands fa-whatsapp text-xl" />
             Discutons de votre projet sur WhatsApp
