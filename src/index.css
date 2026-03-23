@@ -189,10 +189,19 @@
 
 /* Infinite Testimonial Slider */
 .testimonial-slider {
+  --width: 280px;
+  --height: 300px;
   width: 100%;
   height: var(--height);
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+}
+
+@media (min-width: 768px) {
+  .testimonial-slider {
+    --width: 330px;
+    --height: 340px;
+  }
 }
 
 .testimonial-list {

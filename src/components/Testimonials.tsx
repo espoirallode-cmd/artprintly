@@ -23,8 +23,6 @@ const Testimonials = () => {
       <div 
         className="testimonial-slider"
         style={{ 
-          "--width": "330px", 
-          "--height": "340px", 
           "--quantity": quantity 
         } as React.CSSProperties}
       >
