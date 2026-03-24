@@ -53,7 +53,7 @@ const Services = () => {
 
         <div className={`flex flex-col items-center gap-4 transition-all duration-1000 delay-500 ${cardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <a
-            href="https://wa.me/22901000000"
+            href="https://wa.me/+2290190107869"
             target="_blank"
             rel="noopener noreferrer"
             className="pulse-whatsapp flex items-center justify-center whitespace-nowrap gap-2 md:gap-3 bg-white/[0.05] backdrop-blur-xl hover:bg-white/[0.1] text-white font-montserrat font-semibold text-[12px] sm:text-sm md:text-base px-5 md:px-8 py-3 md:py-4 rounded-full transition-all active:scale-95 border border-white/20 shadow-2xl max-w-full"
