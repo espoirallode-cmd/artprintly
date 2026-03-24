@@ -53,7 +53,9 @@ const Hero = () => {
                 <i className="fa-solid fa-eye text-brand-green group-hover:scale-110 transition-transform" aria-hidden="true" /> Voir le Catalogue
               </a>
               <a
-                href="#offre"
+                href="https://marcshopbusiness.mychariow.shop"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="pulse-cta inline-flex items-center gap-2 bg-brand-green text-brand-white font-montserrat font-semibold px-6 md:px-8 py-3 md:py-4 rounded-xl hover:brightness-110 transition-all active:scale-[0.97] shadow-xl shadow-brand-green/20 text-sm md:text-base"
               >
                 <i className="fa-solid fa-bag-shopping" aria-hidden="true" /> Obtenir le Pack

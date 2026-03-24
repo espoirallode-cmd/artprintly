@@ -21,7 +21,9 @@ const FinalCTA = () => {
           Rejoignez des centaines de clients satisfaits. 363 motifs premium pour seulement 50€.
         </p>
         <a
-          href="#offre"
+          href="https://marcshopbusiness.mychariow.shop"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`mt-8 inline-flex items-center gap-2 bg-brand-green text-brand-white font-montserrat font-semibold px-10 py-4 rounded-xl
             hover:brightness-110 shadow-lg shadow-brand-green/20 transition-all duration-300 active:scale-[0.97]
             animate-in ${isVisible ? "visible" : ""}`}

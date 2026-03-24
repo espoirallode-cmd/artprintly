@@ -63,7 +63,9 @@ const Offer = () => {
                 <p className="font-montserrat text-brand-white/60 text-sm mt-3 tracking-wide">Paiement unique — Accès à vie</p>
               </div>
               <a
-                href="#"
+                href="https://marcshopbusiness.mychariow.shop"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="pulse-cta mt-8 relative -top-6 inline-flex items-center justify-center gap-2 bg-brand-green border border-white/20 text-brand-white font-montserrat font-bold px-7 py-3 rounded-xl w-full max-w-[280px] hover:brightness-110 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)] transition-all active:scale-[0.98] overflow-hidden group shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] text-sm whitespace-nowrap"
                 aria-label="Obtenir le pack maintenant"
               >

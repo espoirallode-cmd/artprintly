@@ -40,7 +40,9 @@ const Navbar = () => {
         </ul>
 
         <a
-          href="#offre"
+          href="https://marcshopbusiness.mychariow.shop"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-2 bg-brand-green text-brand-white font-montserrat font-semibold text-sm px-5 py-2.5 rounded-full hover:brightness-110 transition-all active:scale-95"
           aria-label="Obtenir le pack"
         >
@@ -74,7 +76,9 @@ const Navbar = () => {
             ))}
           </ul>
           <a
-            href="#offre"
+            href="https://marcshopbusiness.mychariow.shop"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
             className="mt-4 inline-flex items-center gap-2 bg-brand-green text-brand-white font-montserrat font-semibold text-sm px-5 py-2.5 rounded-full"
           >
