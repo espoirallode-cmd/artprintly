@@ -17,7 +17,7 @@ const Footer = () => (
         </div>
         <div className="flex gap-4 text-brand-white text-lg">
           <a href="https://wa.me/+2290190107869" target="_blank" rel="noopener noreferrer" className="hover:text-brand-green transition-colors" aria-label="WhatsApp"><i className="fa-brands fa-whatsapp" aria-hidden="true" /></a>
-          <a href="#" className="hover:text-brand-green transition-colors" aria-label="Facebook"><i className="fa-brands fa-facebook" aria-hidden="true" /></a>
+          <a href="https://www.facebook.com/ArtPrintly" target="_blank" rel="noopener noreferrer" className="hover:text-brand-green transition-colors" aria-label="Facebook"><i className="fa-brands fa-facebook" aria-hidden="true" /></a>
           <a href="#" className="hover:text-brand-green transition-colors" aria-label="Email"><i className="fa-solid fa-envelope" aria-hidden="true" /></a>
         </div>
       </div>
