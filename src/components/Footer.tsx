@@ -12,7 +12,7 @@ const Footer = () => (
             <a href="#" className="hover:text-brand-white transition-colors">Contact</a>
           </div>
           <p className="font-montserrat text-brand-white/30 text-xs">
-            © 2025 ArtPrintly — Tous droits réservés
+            © 2026 ArtPrintly — Tous droits réservés
           </p>
         </div>
         <div className="flex gap-4 text-brand-white text-lg">
