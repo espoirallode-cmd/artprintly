@@ -1,150 +1,153 @@
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
-const cardsData = [
-  {
-    id: 1,
-    image: "/cat_9.jpg",
-    alt: "Collage Street Art Abstrait",
-    rotate: -18,
-    translateY: 34,
-    zIndex: 10,
-  },
-  {
-    id: 2,
-    image: "/cat_8.jpg",
-    alt: "Illustration Bleue Graphique",
-    rotate: -11,
-    translateY: 16,
-    zIndex: 20,
-    bubble: {
-      text: "@coplin",
-      bg: "bg-[#2563eb]",
-      tailColor: "border-t-[#2563eb]",
-    },
-  },
-  {
-    id: 3,
-    image: "/cat_7.jpg",
-    alt: "Pop Art Vintage Jaune",
-    rotate: -5,
-    translateY: 4,
-    zIndex: 30,
-  },
-  {
-    id: 4,
-    image: "/cat_1.jpg",
-    alt: "Art Décoratif Contemporain",
-    rotate: 0,
-    translateY: 0,
-    zIndex: 40,
-  },
-  {
-    id: 5,
-    image: "/cat_14.jpg",
-    alt: "Graphisme & Portrait Rétro",
-    rotate: 5,
-    translateY: 4,
-    zIndex: 30,
-  },
-  {
-    id: 6,
-    image: "/cat_11.jpg",
-    alt: "Affiche Rétro 66 Pop",
-    rotate: 11,
-    translateY: 16,
-    zIndex: 20,
-  },
-  {
-    id: 7,
-    image: "/cat_2.jpg",
-    alt: "Typographie & Design Vert",
-    rotate: 18,
-    translateY: 34,
-    zIndex: 10,
-    bubble: {
-      text: "@andrea",
-      bg: "bg-[#4e9471]",
-      tailColor: "border-t-[#4e9471]",
-    },
-  },
+const allImages = [
+  { image: "/cat_9.jpg",  alt: "Collage Street Art Abstrait" },
+  { image: "/cat_8.jpg",  alt: "Illustration Bleue Graphique" },
+  { image: "/cat_7.jpg",  alt: "Pop Art Vintage Jaune" },
+  { image: "/cat_1.jpg",  alt: "Art Décoratif Contemporain" },
+  { image: "/cat_14.jpg", alt: "Graphisme & Portrait Rétro" },
+  { image: "/cat_11.jpg", alt: "Affiche Rétro 66 Pop" },
+  { image: "/cat_2.jpg",  alt: "Typographie & Design Vert" },
 ];
+
+const CARD_WIDTH  = 210;
+const GAP         = 22;
+const STEP        = CARD_WIDTH + GAP;
+const LOOP_WIDTH  = STEP * allImages.length;   // one set width
+
+/* Triple the set so we always have cards to the left and right */
+const cards = [...allImages, ...allImages, ...allImages];
 
 const Hero = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const trackRef     = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animRef      = useRef<number>(0);
+  const posRef       = useRef(0);           // offset from 0 → LOOP_WIDTH
+
+  useEffect(() => {
+    const track     = trackRef.current;
+    const container = containerRef.current;
+    if (!track || !container) return;
+
+    const SPEED = 1.0; // px per frame  →  left-to-right scroll
+
+    const tick = () => {
+      /* Increase posRef → track shifts right → cards flow left→right */
+      posRef.current += SPEED;
+      if (posRef.current >= LOOP_WIDTH) posRef.current -= LOOP_WIDTH;
+
+      /*
+       * Start showing copy-2 (middle copy) so there's always content on both sides.
+       *   translateX = posRef - LOOP_WIDTH
+       *   posRef=0  → translateX=-LOOP_WIDTH → copy-2 starts at left of viewport
+       *   posRef=LOOP_WIDTH → translateX=0  → copy-1 starts (seamless, looks identical)
+       */
+      track.style.transform = `translateX(${posRef.current - LOOP_WIDTH}px)`;
+
+      /* ── 3-D perspective rotation ── */
+      const cRect  = container.getBoundingClientRect();
+      const cCx    = cRect.left + cRect.width / 2;
+
+      track.querySelectorAll<HTMLElement>(".hc3d").forEach((el) => {
+        const r   = el.getBoundingClientRect();
+        const cx  = r.left + r.width / 2;
+        const d   = cx - cCx;                                 // signed distance from center
+        const max = cRect.width * 0.56;                       // max reach before full rotation
+        const t   = Math.max(-1, Math.min(1, d / max));       // clamped -1..1
+        const ry  = t * -52;                                  // rotateY: left cards tilt right, right cards tilt left
+        const sc  = 1 - Math.abs(t) * 0.18;                  // slight scale down at edges
+        const op  = Math.max(0.18, 1 - Math.abs(t) * 0.65);  // fade at edges
+        el.style.transform = `rotateY(${ry}deg) scale(${sc})`;
+        el.style.opacity   = String(op);
+      });
+
+      animRef.current = requestAnimationFrame(tick);
+    };
+
+    animRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animRef.current);
+  }, []);
 
   return (
-    <section 
-      className="relative overflow-hidden flex flex-col items-center justify-center bg-transparent pt-32 sm:pt-36 md:pt-40 pb-20 md:pb-28" 
+    <section
+      className="relative overflow-hidden flex flex-col items-center justify-center bg-transparent pt-32 sm:pt-36 md:pt-40 pb-20 md:pb-28"
       ref={ref}
     >
       <div className="container mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center">
-        {/* Main Title - Centered exactly like reference image */}
+
+        {/* ── Main Title ── */}
         <div className={`text-center max-w-4xl mx-auto animate-in ${isVisible ? "visible" : ""}`}>
           <h1 className="font-outfit font-extrabold text-[#112a1b] text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.08] text-balance">
             A place to display your masterpiece.
           </h1>
         </div>
 
-        {/* Fanned-out Deck of Cards - Exactly like reference image */}
-        <div 
-          className={`w-full max-w-6xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
+        {/* ── 3-D Perspective Scrolling Cards ── */}
+        <div
+          className={`w-full my-12 sm:my-16 md:my-20 animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
-            <div className="flex items-center justify-center min-w-[700px] sm:min-w-[850px] md:min-w-[950px] lg:min-w-0">
-              {cardsData.map((card, index) => {
-                const isHovered = hoveredId === card.id;
-                return (
+          {/* Outer clip + perspective container */}
+          <div
+            ref={containerRef}
+            className="relative w-full overflow-hidden"
+            style={{
+              perspective:       "1100px",
+              perspectiveOrigin: "50% 50%",
+              /* Soft fade on left & right edges to blend with background */
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+            }}
+          >
+            {/* Scrolling track */}
+            <div
+              ref={trackRef}
+              className="flex py-10"
+              style={{
+                gap:         `${GAP}px`,
+                width:       "max-content",
+                willChange:  "transform",
+              }}
+            >
+              {cards.map((card, i) => (
+                <div
+                  key={i}
+                  className="hc3d shrink-0"
+                  style={{
+                    width:          `${CARD_WIDTH}px`,
+                    height:         "270px",
+                    transformStyle: "preserve-3d",
+                    willChange:     "transform, opacity",
+                  }}
+                >
+                  {/* Card face */}
                   <div
-                    key={card.id}
-                    onMouseEnter={() => setHoveredId(card.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24"
-                    }`}
+                    className="w-full h-full rounded-[2rem] overflow-hidden"
                     style={{
-                      transform: isHovered
-                        ? "translateY(-24px) scale(1.1) rotate(0deg)"
-                        : `translateY(${card.translateY}px) rotate(${card.rotate}deg)`,
-                      zIndex: isHovered ? 60 : card.zIndex,
+                      border:     "3px solid rgba(255,255,255,0.9)",
+                      boxShadow:  "0 28px 65px -12px rgba(0,0,0,0.24), 0 10px 28px -8px rgba(0,0,0,0.14)",
+                      background: "#fff",
                     }}
                   >
-                    {/* Speech Bubble Tag (@coplin / @andrea) */}
-                    {card.bubble && (
-                      <div 
-                        className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-transform duration-300 group-hover:scale-110"
-                      >
-                        <div className={`relative ${card.bubble.bg} text-white font-montserrat text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap`}>
-                          {card.bubble.text}
-                          {/* Triangle indicator */}
-                          <div 
-                            className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] ${card.bubble.tailColor}`} 
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Card Body */}
-                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border-[3px] border-white/85 bg-white shadow-[0_20px_45px_-10px_rgba(0,0,0,0.22),0_10px_20px_-6px_rgba(0,0,0,0.12)] transition-shadow duration-300 group-hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)]">
-                      <img
-                        src={card.image}
-                        alt={card.alt}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      {/* Subtle glossy overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" />
-                    </div>
+                    <img
+                      src={card.image}
+                      alt={card.alt}
+                      className="w-full h-full object-cover"
+                      loading="eager"
+                    />
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Subtitle Text - Centered below cards */}
-        <div 
+        {/* ── Subtitle & Buttons ── */}
+        <div
           className={`text-center max-w-2xl mx-auto animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "400ms" }}
         >
@@ -152,7 +155,6 @@ const Hero = () => {
             Artists can display their masterpieces, and buyers can discover and purchase works that resonate with them.
           </p>
 
-          {/* Action Buttons */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
               href="https://marcshopbusiness.mychariow.shop"
@@ -170,6 +172,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
+
       </div>
     </section>
   );
