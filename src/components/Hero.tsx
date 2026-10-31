@@ -1,174 +1,115 @@
-import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
-const cardsData = [
+const cardsList = [
   {
     id: 1,
-    image: "/cat_9.jpg",
-    alt: "Collage Street Art Abstrait",
-    rotate: -18,
-    translateY: 34,
-    zIndex: 10,
+    title: "Design",
+    author: "Chengtao Yi",
+    image: "/ref_card_1.png",
+    alt: "Design - Chengtao Yi",
   },
   {
     id: 2,
-    image: "/cat_8.jpg",
-    alt: "Illustration Bleue Graphique",
-    rotate: -11,
-    translateY: 16,
-    zIndex: 20,
-    bubble: {
-      text: "@coplin",
-      bg: "bg-[#2563eb]",
-      tailColor: "border-t-[#2563eb]",
-    },
+    title: "Places",
+    author: "Brooke Holm",
+    image: "/ref_card_2.png",
+    alt: "Places - Brooke Holm",
   },
   {
     id: 3,
-    image: "/cat_7.jpg",
-    alt: "Pop Art Vintage Jaune",
-    rotate: -5,
-    translateY: 4,
-    zIndex: 30,
+    title: "Apogee",
+    author: "John Westrock",
+    image: "/ref_card_3.png",
+    alt: "Apogee - John Westrock",
   },
-  {
-    id: 4,
-    image: "/cat_1.jpg",
-    alt: "Art Décoratif Contemporain",
-    rotate: 0,
-    translateY: 0,
-    zIndex: 40,
-  },
-  {
-    id: 5,
-    image: "/cat_14.jpg",
-    alt: "Graphisme & Portrait Rétro",
-    rotate: 5,
-    translateY: 4,
-    zIndex: 30,
-  },
-  {
-    id: 6,
-    image: "/cat_11.jpg",
-    alt: "Affiche Rétro 66 Pop",
-    rotate: 11,
-    translateY: 16,
-    zIndex: 20,
-  },
-  {
-    id: 7,
-    image: "/cat_2.jpg",
-    alt: "Typographie & Design Vert",
-    rotate: 18,
-    translateY: 34,
-    zIndex: 10,
-    bubble: {
-      text: "@andrea",
-      bg: "bg-[#4e9471]",
-      tailColor: "border-t-[#4e9471]",
-    },
-  },
+];
+
+// Duplicate list for seamless infinite loop from right to left
+const infiniteCards = [
+  ...cardsList,
+  ...cardsList,
+  ...cardsList,
+  ...cardsList,
 ];
 
 const Hero = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
     <section 
-      className="relative overflow-hidden flex flex-col items-center justify-center bg-transparent pt-32 sm:pt-36 md:pt-40 pb-20 md:pb-28" 
       ref={ref}
+      className="relative w-full min-h-[92vh] sm:min-h-screen flex flex-col justify-between overflow-hidden bg-[#e8e8ea] pt-28 pb-10"
+      style={{
+        background: "radial-gradient(ellipse 90% 70% at 50% 25%, #f5f5f7 0%, #ebebef 55%, #dedee2 100%)",
+      }}
     >
-      <div className="container mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center">
-        {/* Main Title - Centered exactly like reference image */}
-        <div className={`text-center max-w-4xl mx-auto animate-in ${isVisible ? "visible" : ""}`}>
-          <h1 className="font-outfit font-extrabold text-[#112a1b] text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.08] text-balance">
-            A place to display your masterpiece.
-          </h1>
+      {/* Background Studio Lighting & Atmosphere */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Soft top-down studio ambient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[500px] bg-white/40 blur-[120px] rounded-full" />
+        {/* Soft floor shadow line */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/[0.04] to-transparent" />
+      </div>
+
+      {/* Main Content Area: Floating Infinite Scrolling Cards */}
+      <div className={`relative z-10 w-full my-auto py-4 sm:py-8 transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        {/* Continuous Horizontal Marquee (scrolling from right side to left) */}
+        <div className="w-full overflow-hidden no-scrollbar">
+          <div className="animate-cards-scroll flex items-center gap-10 sm:gap-14 md:gap-16 pl-6 sm:pl-12">
+            {infiniteCards.map((card, idx) => (
+              <div
+                key={`${card.id}-${idx}`}
+                className="group relative shrink-0 w-[205px] h-[285px] sm:w-[250px] sm:h-[350px] md:w-[285px] md:h-[400px] rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden bg-white shadow-[0_22px_45px_-10px_rgba(0,0,0,0.18),0_10px_20px_-6px_rgba(0,0,0,0.10)] transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.28)] cursor-pointer"
+              >
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                  loading="eager"
+                />
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
 
-        {/* Fanned-out Deck of Cards - Exactly like reference image */}
-        <div 
-          className={`w-full max-w-6xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
-          style={{ transitionDelay: "200ms" }}
-        >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
-            <div className="flex items-center justify-center min-w-[700px] sm:min-w-[850px] md:min-w-[950px] lg:min-w-0">
-              {cardsData.map((card, index) => {
-                const isHovered = hoveredId === card.id;
-                return (
-                  <div
-                    key={card.id}
-                    onMouseEnter={() => setHoveredId(card.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24"
-                    }`}
-                    style={{
-                      transform: isHovered
-                        ? "translateY(-24px) scale(1.1) rotate(0deg)"
-                        : `translateY(${card.translateY}px) rotate(${card.rotate}deg)`,
-                      zIndex: isHovered ? 60 : card.zIndex,
-                    }}
-                  >
-                    {/* Speech Bubble Tag (@coplin / @andrea) */}
-                    {card.bubble && (
-                      <div 
-                        className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-transform duration-300 group-hover:scale-110"
-                      >
-                        <div className={`relative ${card.bubble.bg} text-white font-montserrat text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap`}>
-                          {card.bubble.text}
-                          {/* Triangle indicator */}
-                          <div 
-                            className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] ${card.bubble.tailColor}`} 
-                          />
-                        </div>
-                      </div>
-                    )}
+      {/* Foreground Minimalist Modern Desk, Chair & Plant Scene */}
+      <div className="relative z-20 w-full flex justify-center items-end pointer-events-none -mt-16 sm:-mt-24 md:-mt-32">
+        <div className="w-[92%] max-w-[560px] sm:max-w-[700px] md:max-w-[820px] lg:max-w-[900px] mx-auto relative">
+          <img 
+            src="/ref_desk.png" 
+            alt="Bureau scandinave minimaliste avec chaise et plante"
+            className="w-full h-auto object-contain mx-auto select-none pointer-events-none filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.06)]"
+          />
+        </div>
+      </div>
 
-                    {/* Card Body */}
-                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border-[3px] border-white/85 bg-white shadow-[0_20px_45px_-10px_rgba(0,0,0,0.22),0_10px_20px_-6px_rgba(0,0,0,0.12)] transition-shadow duration-300 group-hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)]">
-                      <img
-                        src={card.image}
-                        alt={card.alt}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      {/* Subtle glossy overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+      {/* Bottom Floating Bar Elements */}
+      <div className="relative z-30 container mx-auto px-6 sm:px-10 flex items-end justify-between mt-auto">
+        {/* Bottom Left Badge: Stories / Design, Living, Voyage */}
+        <div className="flex items-center gap-3 select-none backdrop-blur-md bg-white/40 px-4 py-2.5 rounded-2xl border border-white/60 shadow-sm">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#6366f1] via-[#8b5cf6] to-[#ec4899] shadow-md shadow-indigo-500/20 flex items-center justify-center shrink-0">
+            <div className="w-3.5 h-3.5 rounded-sm bg-white/40" />
+          </div>
+          <div>
+            <h3 className="font-outfit font-semibold text-base sm:text-lg text-[#1e1e24] leading-none tracking-tight">
+              Stories
+            </h3>
+            <p className="font-montserrat text-[11px] sm:text-xs text-[#6b7280] font-medium tracking-wide mt-1">
+              Design, Living, Voyage
+            </p>
           </div>
         </div>
 
-        {/* Subtitle Text - Centered below cards */}
-        <div 
-          className={`text-center max-w-2xl mx-auto animate-in ${isVisible ? "visible" : ""}`}
-          style={{ transitionDelay: "400ms" }}
-        >
-          <p className="font-montserrat text-[#143521]/75 text-sm sm:text-base md:text-lg leading-relaxed text-balance">
-            Artists can display their masterpieces, and buyers can discover and purchase works that resonate with them.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="https://marcshopbusiness.mychariow.shop"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-[#112a1b] hover:bg-[#1b4332] text-white font-montserrat font-semibold px-8 py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 text-sm sm:text-base cursor-pointer"
-            >
-              Join for $9.99/m
-            </a>
-            <a
-              href="#catalogue"
-              className="inline-flex items-center justify-center bg-white/80 hover:bg-white text-[#143521] font-montserrat font-semibold px-7 py-3.5 rounded-full border border-white/90 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 text-sm sm:text-base backdrop-blur-md cursor-pointer"
-            >
-              Read more
-            </a>
-          </div>
+        {/* Bottom Right Call To Action: Link to Collection */}
+        <div className="flex items-center gap-3">
+          <a
+            href="#catalogue"
+            className="inline-flex items-center gap-2.5 bg-[#143521] hover:bg-[#1b4332] text-white text-xs sm:text-sm font-montserrat font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 pointer-events-auto"
+          >
+            <span>Explorer la collection</span>
+            <i className="fa-solid fa-arrow-right text-xs" />
+          </a>
         </div>
       </div>
     </section>
