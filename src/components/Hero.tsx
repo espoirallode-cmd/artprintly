@@ -4,16 +4,16 @@ import { useScrollAnimation } from "@/hooks/useAnimations";
 const cardsData = [
   {
     id: 1,
-    image: "/card_art_1.jpg",
-    alt: "Montagne & Sphère Dorée",
+    image: "/cat_9.jpg",
+    alt: "Collage Street Art Abstrait",
     rotate: -18,
     translateY: 34,
     zIndex: 10,
   },
   {
     id: 2,
-    image: "/card_art_2.jpg",
-    alt: "Sakura & Montagne Japonaise",
+    image: "/cat_8.jpg",
+    alt: "Illustration Bleue Graphique",
     rotate: -11,
     translateY: 16,
     zIndex: 20,
@@ -25,40 +25,40 @@ const cardsData = [
   },
   {
     id: 3,
-    image: "/card_art_3.jpg",
-    alt: "Désert & Cactus Minimaliste",
+    image: "/cat_7.jpg",
+    alt: "Pop Art Vintage Jaune",
     rotate: -5,
     translateY: 4,
     zIndex: 30,
   },
   {
     id: 4,
-    image: "/card_art_5.jpg",
-    alt: "Mont Fuji Paper Cut",
+    image: "/cat_1.jpg",
+    alt: "Art Décoratif Contemporain",
     rotate: 0,
     translateY: 0,
     zIndex: 40,
   },
   {
     id: 5,
-    image: "/card_art_4.jpg",
-    alt: "Pyramides & Lune Pastel",
+    image: "/cat_14.jpg",
+    alt: "Graphisme & Portrait Rétro",
     rotate: 5,
     translateY: 4,
     zIndex: 30,
   },
   {
     id: 6,
-    image: "/card_art_6.jpg",
-    alt: "Cerisier & Lac Turquoise",
+    image: "/cat_11.jpg",
+    alt: "Affiche Rétro 66 Pop",
     rotate: 11,
     translateY: 16,
     zIndex: 20,
   },
   {
     id: 7,
-    image: "/card_art_7.jpg",
-    alt: "Botanique Géométrique Abstrait",
+    image: "/cat_2.jpg",
+    alt: "Typographie & Design Vert",
     rotate: 18,
     translateY: 34,
     zIndex: 10,
@@ -126,13 +126,15 @@ const Hero = () => {
                       </div>
                     )}
 
-                    {/* Card Body - Clean card with no white frame border and no sharp underlying elements */}
-                    <div className="relative w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)]">
+                    {/* Card Body */}
+                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border-[3px] border-white/85 bg-white shadow-[0_20px_45px_-10px_rgba(0,0,0,0.22),0_10px_20px_-6px_rgba(0,0,0,0.12)] transition-shadow duration-300 group-hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)]">
                       <img
                         src={card.image}
                         alt={card.alt}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      {/* Subtle glossy overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" />
                     </div>
                   </div>
                 );
