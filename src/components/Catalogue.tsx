@@ -26,13 +26,13 @@ const Catalogue = () => {
   const displayedThemes = isExpanded ? themes : themes.slice(0, 6);
 
   return (
-    <section id="catalogue" className="bg-brand-black py-20 md:py-28" ref={ref}>
+    <section id="catalogue" className="bg-transparent py-20 md:py-28" ref={ref}>
       <div className="container mx-auto px-6">
         <div className={`text-center mb-14 animate-in ${isVisible ? "visible" : ""}`}>
-          <h2 className="font-outfit font-semibold text-brand-white text-3xl md:text-4xl text-balance">
+          <h2 className="font-outfit font-bold text-[#143521] text-3xl md:text-4xl text-balance">
             Aperçu de la Collection
           </h2>
-          <p className="font-montserrat text-brand-white/50 mt-3 max-w-2xl mx-auto">
+          <p className="font-montserrat text-[#143521]/65 mt-3 max-w-2xl mx-auto">
             Quelques motifs de notre collection premium — 363 créations vous attendent.
           </p>
         </div>
@@ -44,8 +44,8 @@ const Catalogue = () => {
             return (
               <div
                 key={t.name}
-                className={`group relative ${isVertical ? "aspect-[3/4]" : "aspect-[4/3]"} rounded-2xl overflow-hidden shadow-lg shadow-black/10 cursor-pointer
-                  border border-transparent hover:border-brand-green transition-all duration-500
+                className={`group relative ${isVertical ? "aspect-[3/4]" : "aspect-[4/3]"} rounded-2xl overflow-hidden shadow-lg shadow-emerald-950/10 cursor-pointer
+                  border border-white/60 hover:border-brand-green transition-all duration-500
                   animate-in ${isVisible ? "visible" : ""}`}
                 style={{ transitionDelay: `${(i % 6) * 100 + 200}ms` }}
               >
@@ -61,7 +61,7 @@ const Catalogue = () => {
                     <i className={`fa-solid ${t.icon} text-brand-green/20 text-6xl`} aria-hidden="true" />
                   </div>
                 )}
-                <div className={`absolute inset-0 bg-brand-black/20 group-hover:bg-brand-black/0 transition-colors duration-500`} />
+                <div className={`absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500`} />
               </div>
             </div>
           );
@@ -70,7 +70,7 @@ const Catalogue = () => {
 
         {isExpanded && (
           <div className="flex justify-center mt-16 animate-in visible">
-            <p className="font-montserrat text-brand-green/80 italic text-lg text-center border-t border-brand-white/10 pt-10 px-6 max-w-2xl">
+            <p className="font-montserrat text-brand-green font-medium italic text-lg text-center border-t border-brand-green/20 pt-10 px-6 max-w-2xl">
               Voir le reste des motifs dans le pack
             </p>
           </div>
@@ -80,7 +80,7 @@ const Catalogue = () => {
           <div className="flex justify-center">
             <button 
               onClick={() => setIsExpanded(true)}
-              className={`mt-10 inline-flex items-center gap-2 bg-brand-white/[0.05] border border-brand-white/10 backdrop-blur-md px-8 py-3.5 rounded-2xl font-montserrat text-brand-green font-semibold cursor-pointer hover:bg-brand-white/10 hover:border-brand-white/20 transition-all shadow-xl animate-in ${isVisible ? "visible" : ""}`}
+              className={`mt-10 inline-flex items-center gap-2 bg-white/80 border border-white/90 backdrop-blur-md px-8 py-3.5 rounded-2xl font-montserrat text-brand-green font-semibold cursor-pointer hover:bg-white hover:border-white transition-all shadow-md animate-in ${isVisible ? "visible" : ""}`}
               style={{ transitionDelay: "400ms" }}
             >
               Voir plus

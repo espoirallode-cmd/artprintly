@@ -14,9 +14,9 @@ const FAQ = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-brand-black py-20 md:py-28" ref={ref}>
+    <section id="faq" className="bg-transparent py-20 md:py-28" ref={ref}>
       <div className="container mx-auto px-6 max-w-2xl">
-        <h2 className={`font-outfit font-semibold text-brand-white text-2xl md:text-4xl text-center mb-10 md:mb-14 text-balance animate-in ${isVisible ? "visible" : ""}`}>
+        <h2 className={`font-outfit font-bold text-[#143521] text-2xl md:text-4xl text-center mb-10 md:mb-14 text-balance animate-in ${isVisible ? "visible" : ""}`}>
           Questions Fréquentes
         </h2>
 
@@ -26,8 +26,8 @@ const FAQ = () => {
             return (
               <div
                 key={i}
-                className={`rounded-2xl border border-brand-white/5 transition-all duration-300 animate-in relative overflow-hidden group ${isVisible ? "visible" : ""}
-                  ${isOpen ? "bg-brand-dark scale-[1.01]" : "bg-brand-dark/40"}`}
+                className={`rounded-2xl border transition-all duration-300 animate-in relative overflow-hidden group ${isVisible ? "visible" : ""}
+                  ${isOpen ? "bg-white/95 border-brand-green/30 shadow-md scale-[1.01]" : "bg-white/70 border-white/85 shadow-sm hover:bg-white/85"}`}
                 style={{ transitionDelay: `${i * 100 + 200}ms` }}
               >
                 {/* Glow Source (Top-Right Internal) */}
@@ -37,12 +37,12 @@ const FAQ = () => {
                   className="w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 text-left"
                   aria-expanded={isOpen}
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-white/5 rounded-xl flex items-center justify-center shrink-0 border border-brand-white/5">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-green/10 rounded-xl flex items-center justify-center shrink-0 border border-brand-green/20">
                     <i className={`fa-solid ${item.icon} text-brand-green text-base md:text-lg`} aria-hidden="true" />
                   </div>
-                  <span className="font-montserrat font-bold text-brand-white text-xs md:text-base flex-1 pr-2 md:pr-4">{item.q}</span>
-                  <div className={`w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-brand-white/5 flex items-center justify-center transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
-                    <i className="fa-solid fa-chevron-down text-brand-white/40 text-[8px] md:text-[10px]" aria-hidden="true" />
+                  <span className="font-montserrat font-bold text-[#143521] text-xs md:text-base flex-1 pr-2 md:pr-4">{item.q}</span>
+                  <div className={`w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black/5 flex items-center justify-center transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+                    <i className="fa-solid fa-chevron-down text-[#143521]/60 text-[8px] md:text-[10px]" aria-hidden="true" />
                   </div>
                 </button>
                 <div
@@ -50,7 +50,7 @@ const FAQ = () => {
                   style={{ maxHeight: isOpen ? "250px" : "0", opacity: isOpen ? 1 : 0 }}
                 >
                   <div className="px-4 md:px-5 pb-5 md:pb-6 pt-2 ml-14 md:ml-16">
-                    <p className="font-montserrat text-brand-white/60 text-[11px] md:text-sm leading-relaxed">
+                    <p className="font-montserrat text-[#143521]/75 text-[11px] md:text-sm leading-relaxed">
                       {item.a}
                     </p>
                   </div>
