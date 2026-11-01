@@ -56,7 +56,7 @@ const StatItem = ({
   const count = useCountUp(end, 2000, isVisible);
   return (
     <div
-      className={`group relative p-4 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 border border-white/85 backdrop-blur-xl animate-in ${isVisible ? "visible" : ""} hover:bg-white/95 shadow-[0_10px_30px_rgba(20,60,30,0.07)] transition-all duration-700 flex flex-col justify-between ${className}`}
+      className={`group relative p-4 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] bg-[#ebf7ee] border border-[#d4eedd] animate-in ${isVisible ? "visible" : ""} hover:brightness-[0.97] shadow-[0_8px_24px_rgba(20,80,40,0.10)] hover:shadow-[0_12px_32px_rgba(20,80,40,0.15)] transition-all duration-700 flex flex-col justify-between ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {/* Icon top-left */}
