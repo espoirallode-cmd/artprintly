@@ -126,15 +126,13 @@ const Hero = () => {
                       </div>
                     )}
 
-                    {/* Card Body */}
-                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border-[3px] border-white/85 bg-white shadow-[0_20px_45px_-10px_rgba(0,0,0,0.22),0_10px_20px_-6px_rgba(0,0,0,0.12)] transition-shadow duration-300 group-hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)]">
+                    {/* Card Body - No white frame/border */}
+                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden shadow-[0_20px_45px_-10px_rgba(0,0,0,0.22),0_10px_20px_-6px_rgba(0,0,0,0.12)] transition-shadow duration-300 group-hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.35)]">
                       <img
                         src={card.image}
                         alt={card.alt}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      {/* Subtle glossy overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" />
                     </div>
                   </div>
                 );
