@@ -4,69 +4,45 @@ import { useScrollAnimation } from "@/hooks/useAnimations";
 const cardsData = [
   {
     id: 1,
-    image: "/artwork_1.jpg",
-    alt: "Renard Aquarelle Vibrant",
-    rotate: -18,
-    translateY: 34,
+    image: "/hero_card_1.jpg",
+    alt: "Étudiante avec casque qui écrit à son bureau",
+    rotate: -9,
+    translateY: 12,
     zIndex: 10,
+    pill: {
+      type: "less",
+      label: "Less",
+      dotColor: "bg-[#2563eb]",
+    },
   },
   {
     id: 2,
-    image: "/artwork_2.jpg",
-    alt: "Montagne & Sphère Dorée Zen",
-    rotate: -11,
-    translateY: 16,
+    image: "/hero_card_2.jpg",
+    alt: "Carnet de notes, tasse de café et plante",
+    rotate: -3,
+    translateY: 0,
     zIndex: 20,
-    bubble: {
-      text: "@coplin",
-      bg: "bg-[#2563eb]",
-      tailColor: "border-t-[#2563eb]",
-    },
   },
   {
     id: 3,
-    image: "/artwork_3.jpg",
-    alt: "Ours & Ourson Peinture Pop",
-    rotate: -5,
+    image: "/hero_card_3.jpg",
+    alt: "Personne assise contemplant un lac de montagne",
+    rotate: 3,
     translateY: 4,
     zIndex: 30,
+    pill: {
+      type: "more",
+      label: "More",
+      dotColor: "bg-[#22c55e]",
+    },
   },
   {
     id: 4,
-    image: "/artwork_4.jpg",
-    alt: "Feuille Botanique Moderne",
-    rotate: 0,
-    translateY: 0,
-    zIndex: 40,
-  },
-  {
-    id: 5,
-    image: "/artwork_5.jpg",
-    alt: "Tour Eiffel Crépuscule Peinture",
-    rotate: 5,
-    translateY: 4,
-    zIndex: 30,
-  },
-  {
-    id: 6,
-    image: "/artwork_6.jpg",
-    alt: "Mont Fuji Paper Cut & Sakura",
-    rotate: 11,
+    image: "/hero_card_4.jpg",
+    alt: "Cycliste sur route de montagne au coucher du soleil",
+    rotate: 9,
     translateY: 16,
     zIndex: 20,
-  },
-  {
-    id: 7,
-    image: "/artwork_7.jpg",
-    alt: "Botanique Géométrique Moderne",
-    rotate: 18,
-    translateY: 34,
-    zIndex: 10,
-    bubble: {
-      text: "@andrea",
-      bg: "bg-[#4e9471]",
-      tailColor: "border-t-[#4e9471]",
-    },
   },
 ];
 
@@ -80,20 +56,20 @@ const Hero = () => {
       ref={ref}
     >
       <div className="container mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center">
-        {/* Main Title - Centered exactly like reference image */}
+        {/* Main Title */}
         <div className={`text-center max-w-4xl mx-auto animate-in ${isVisible ? "visible" : ""}`}>
           <h1 className="font-outfit font-extrabold text-[#112a1b] text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.08] text-balance">
             A place to display your masterpiece.
           </h1>
         </div>
 
-        {/* Fanned-out Deck of Cards - Exactly like reference image */}
+        {/* 4 Cards Deck Layout Matching Exactly The Reference Design */}
         <div 
-          className={`w-full max-w-6xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
+          className={`w-full max-w-5xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-hidden w-full">
-            <div className="flex items-center justify-center min-w-[700px] sm:min-w-[850px] md:min-w-[950px] lg:min-w-0">
+          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
+            <div className="flex items-center justify-center min-w-[620px] sm:min-w-[760px] md:min-w-[880px] lg:min-w-0">
               {cardsData.map((card, index) => {
                 const isHovered = hoveredId === card.id;
                 return (
@@ -102,32 +78,44 @@ const Hero = () => {
                     onMouseEnter={() => setHoveredId(card.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24"
+                      index === 0 ? "ml-0" : "-ml-8 sm:-ml-12 md:-ml-16 lg:-ml-20"
                     }`}
                     style={{
                       transform: isHovered
-                        ? "translateY(-24px) scale(1.1) rotate(0deg)"
+                        ? "translateY(-20px) scale(1.08) rotate(0deg)"
                         : `translateY(${card.translateY}px) rotate(${card.rotate}deg)`,
                       zIndex: isHovered ? 60 : card.zIndex,
                     }}
                   >
-                    {/* Speech Bubble Tag (@coplin / @andrea) */}
-                    {card.bubble && (
+                    {/* Floating Pill Badge (< Less •  or  • More >) */}
+                    {card.pill && (
                       <div 
-                        className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-transform duration-300 group-hover:scale-110"
+                        className="absolute -right-7 sm:-right-9 top-1/2 -translate-y-1/2 z-50 pointer-events-auto transition-transform duration-300 group-hover:scale-110"
                       >
-                        <div className={`relative ${card.bubble.bg} text-white font-montserrat text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap`}>
-                          {card.bubble.text}
-                          {/* Triangle indicator */}
-                          <div 
-                            className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] ${card.bubble.tailColor}`} 
-                          />
+                        <div className="bg-white/95 backdrop-blur-md text-[#112a1b] font-montserrat font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-[0_12px_28px_rgba(0,0,0,0.18)] border border-white flex items-center gap-2 whitespace-nowrap">
+                          {card.pill.type === "less" ? (
+                            <>
+                              <svg className="w-3 h-3 text-[#112a1b]/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                              </svg>
+                              <span>{card.pill.label}</span>
+                              <span className={`w-2.5 h-2.5 rounded-full ${card.pill.dotColor}`} />
+                            </>
+                          ) : (
+                            <>
+                              <span className={`w-2.5 h-2.5 rounded-full ${card.pill.dotColor}`} />
+                              <span>{card.pill.label}</span>
+                              <svg className="w-3 h-3 text-[#112a1b]/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </>
+                          )}
                         </div>
                       </div>
                     )}
 
-                    {/* Card Body - Pure cards, no frame, no grey background artifact */}
-                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden shadow-md transition-shadow duration-300 group-hover:shadow-xl">
+                    {/* Card Body - Rounded with thick white border and soft shadow */}
+                    <div className="w-36 h-40 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border-[3.5px] sm:border-[4.5px] border-white bg-white shadow-[0_22px_50px_-10px_rgba(20,50,30,0.22),0_10px_24px_-8px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
                       <img
                         src={card.image}
                         alt={card.alt}
@@ -141,7 +129,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Subtitle Text - Centered below cards */}
+        {/* Subtitle Text */}
         <div 
           className={`text-center max-w-2xl mx-auto animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "400ms" }}
