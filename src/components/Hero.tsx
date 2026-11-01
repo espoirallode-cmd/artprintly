@@ -68,17 +68,20 @@ const Hero = () => {
           className={`w-full max-w-5xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
-            <div className="flex items-center justify-center min-w-[620px] sm:min-w-[760px] md:min-w-[880px] lg:min-w-0">
+          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-visible w-full">
+            <div className="flex items-center justify-center min-w-0 sm:min-w-[760px] md:min-w-[880px] lg:min-w-0">
               {cardsData.map((card, index) => {
                 const isHovered = hoveredId === card.id;
+                const isHiddenOnMobile = card.id === 4;
                 return (
                   <div
                     key={card.id}
                     onMouseEnter={() => setHoveredId(card.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-8 sm:-ml-12 md:-ml-16 lg:-ml-20"
+                      isHiddenOnMobile ? "hidden sm:block" : "block"
+                    } ${
+                      index === 0 ? "ml-0" : "-ml-6 sm:-ml-12 md:-ml-16 lg:-ml-20"
                     }`}
                     style={{
                       transform: isHovered
@@ -115,7 +118,7 @@ const Hero = () => {
                     )}
 
                     {/* Card Body - Rounded with thick white border and soft shadow */}
-                    <div className="w-36 h-40 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border-[3.5px] sm:border-[4.5px] border-white bg-white shadow-[0_22px_50px_-10px_rgba(20,50,30,0.22),0_10px_24px_-8px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
+                    <div className="w-32 h-36 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden border-[3px] sm:border-[4.5px] border-white bg-white shadow-[0_22px_50px_-10px_rgba(20,50,30,0.22),0_10px_24px_-8px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
                       <img
                         src={card.image}
                         alt={card.alt}
