@@ -49,7 +49,7 @@ const Hero = () => {
         {/* Main Title */}
         <div className={`text-center max-w-4xl mx-auto animate-in ${isVisible ? "visible" : ""}`}>
           <h1 className="font-outfit font-extrabold text-[#112a1b] text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.08] text-balance">
-            <span style={{ color: "#1FC270" }}>363</span> Motifs Premium prêts à imprimer chez vous
+            <span style={{ color: "#1FC270" }}>363</span> <span style={{ color: "#1FC270" }}>Motifs</span> Premium prêts à imprimer <span style={{ color: "#1FC270" }}>chez vous</span>
           </h1>
         </div>
 
