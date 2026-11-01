@@ -92,7 +92,7 @@ const Hero = () => {
           className={`w-full max-w-6xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
+          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-hidden w-full">
             <div className="flex items-center justify-center min-w-[700px] sm:min-w-[850px] md:min-w-[950px] lg:min-w-0">
               {cardsData.map((card, index) => {
                 const isHovered = hoveredId === card.id;
