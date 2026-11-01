@@ -9,11 +9,6 @@ const cardsData = [
     rotate: -9,
     translateY: 12,
     zIndex: 10,
-    pill: {
-      type: "less",
-      label: "Less",
-      dotColor: "bg-[#2563eb]",
-    },
   },
   {
     id: 2,
@@ -30,11 +25,6 @@ const cardsData = [
     rotate: 3,
     translateY: 4,
     zIndex: 30,
-    pill: {
-      type: "more",
-      label: "More",
-      dotColor: "bg-[#22c55e]",
-    },
   },
   {
     id: 4,
@@ -90,32 +80,6 @@ const Hero = () => {
                       zIndex: isHovered ? 60 : card.zIndex,
                     }}
                   >
-                    {/* Floating Pill Badge (< Less •  or  • More >) */}
-                    {card.pill && (
-                      <div 
-                        className="absolute -right-7 sm:-right-9 top-1/2 -translate-y-1/2 z-50 pointer-events-auto transition-transform duration-300 group-hover:scale-110"
-                      >
-                        <div className="bg-white/95 backdrop-blur-md text-[#112a1b] font-montserrat font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-[0_12px_28px_rgba(0,0,0,0.18)] border border-white flex items-center gap-2 whitespace-nowrap">
-                          {card.pill.type === "less" ? (
-                            <>
-                              <svg className="w-3 h-3 text-[#112a1b]/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
-                              </svg>
-                              <span>{card.pill.label}</span>
-                              <span className={`w-2.5 h-2.5 rounded-full ${card.pill.dotColor}`} />
-                            </>
-                          ) : (
-                            <>
-                              <span className={`w-2.5 h-2.5 rounded-full ${card.pill.dotColor}`} />
-                              <span>{card.pill.label}</span>
-                              <svg className="w-3 h-3 text-[#112a1b]/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
-                              </svg>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    )}
 
                     {/* Card Body - Rounded with thick white border and soft shadow */}
                     <div className="w-32 h-36 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden border-[3px] sm:border-[4.5px] border-white bg-white shadow-[0_22px_50px_-10px_rgba(20,50,30,0.22),0_10px_24px_-8px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
