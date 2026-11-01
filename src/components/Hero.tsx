@@ -6,16 +6,16 @@ const cardsData = [
     id: 1,
     image: "/cat_9.jpg",
     alt: "Collage Street Art Abstrait",
-    rotate: -18,
-    translateY: 34,
-    zIndex: 10,
+    rotate: 0,
+    translateY: 0,
+    zIndex: 20,
   },
   {
     id: 2,
     image: "/cat_8.jpg",
     alt: "Illustration Bleue Graphique",
-    rotate: -11,
-    translateY: 16,
+    rotate: 0,
+    translateY: 0,
     zIndex: 20,
     bubble: {
       text: "@coplin",
@@ -27,9 +27,9 @@ const cardsData = [
     id: 3,
     image: "/cat_7.jpg",
     alt: "Pop Art Vintage Jaune",
-    rotate: -5,
-    translateY: 4,
-    zIndex: 30,
+    rotate: 0,
+    translateY: 0,
+    zIndex: 20,
   },
   {
     id: 4,
@@ -37,31 +37,31 @@ const cardsData = [
     alt: "Art Décoratif Contemporain",
     rotate: 0,
     translateY: 0,
-    zIndex: 40,
+    zIndex: 20,
   },
   {
     id: 5,
     image: "/cat_14.jpg",
     alt: "Graphisme & Portrait Rétro",
-    rotate: 5,
-    translateY: 4,
-    zIndex: 30,
+    rotate: 0,
+    translateY: 0,
+    zIndex: 20,
   },
   {
     id: 6,
     image: "/cat_11.jpg",
     alt: "Affiche Rétro 66 Pop",
-    rotate: 11,
-    translateY: 16,
+    rotate: 0,
+    translateY: 0,
     zIndex: 20,
   },
   {
     id: 7,
     image: "/cat_2.jpg",
     alt: "Typographie & Design Vert",
-    rotate: 18,
-    translateY: 34,
-    zIndex: 10,
+    rotate: 0,
+    translateY: 0,
+    zIndex: 20,
     bubble: {
       text: "@andrea",
       bg: "bg-[#4e9471]",
@@ -87,34 +87,32 @@ const Hero = () => {
           </h1>
         </div>
 
-        {/* Fanned-out Deck of Cards - Exactly like reference image */}
+        {/* All Cards in Foreground (Premier plan) */}
         <div 
-          className={`w-full max-w-6xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
+          className={`w-full max-w-7xl mx-auto my-12 sm:my-16 md:my-20 px-2 sm:px-4 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="relative flex items-center justify-center py-8 sm:py-12 overflow-hidden w-full">
-            <div className="flex items-center justify-center min-w-[700px] sm:min-w-[850px] md:min-w-[950px] lg:min-w-0">
-              {cardsData.map((card, index) => {
+          <div className="relative flex items-center justify-center py-6 sm:py-10 overflow-x-auto lg:overflow-visible no-scrollbar w-full">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 min-w-max lg:min-w-0">
+              {cardsData.map((card) => {
                 const isHovered = hoveredId === card.id;
                 return (
                   <div
                     key={card.id}
                     onMouseEnter={() => setHoveredId(card.id)}
                     onMouseLeave={() => setHoveredId(null)}
-                    className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24"
-                    }`}
+                    className="relative shrink-0 cursor-pointer transition-all duration-300 ease-out group"
                     style={{
                       transform: isHovered
-                        ? "translateY(-24px) scale(1.1) rotate(0deg)"
-                        : `translateY(${card.translateY}px) rotate(${card.rotate}deg)`,
-                      zIndex: isHovered ? 60 : card.zIndex,
+                        ? "translateY(-16px) scale(1.08)"
+                        : "translateY(0) scale(1)",
+                      zIndex: isHovered ? 50 : 20,
                     }}
                   >
                     {/* Speech Bubble Tag (@coplin / @andrea) */}
                     {card.bubble && (
                       <div 
-                        className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-transform duration-300 group-hover:scale-110"
+                        className="absolute -top-11 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-transform duration-300 group-hover:scale-110"
                       >
                         <div className={`relative ${card.bubble.bg} text-white font-montserrat text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full shadow-lg whitespace-nowrap`}>
                           {card.bubble.text}
@@ -126,8 +124,8 @@ const Hero = () => {
                       </div>
                     )}
 
-                    {/* Card Body - Pure cards, no frame, no grey background artifact */}
-                    <div className="w-32 h-44 sm:w-44 sm:h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden shadow-md transition-shadow duration-300 group-hover:shadow-xl">
+                    {/* Card Body - In foreground */}
+                    <div className="w-28 h-40 sm:w-36 sm:h-52 md:w-44 md:h-60 lg:w-48 lg:h-64 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                       <img
                         src={card.image}
                         alt={card.alt}
