@@ -131,33 +131,13 @@ const Catalogue = () => {
                   zIndex,
                 } as React.CSSProperties}
               >
-                {/* Image */}
+                {/* Image only — no overlay text or buttons */}
                 <img
                   src={theme.image}
                   alt={theme.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-
-                {/* Subtle bottom shadow overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent pointer-events-none" />
-
-                {/* Card footer details */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 flex items-end justify-between z-10">
-                  <div>
-                    <h3 className="font-outfit font-bold text-white text-lg sm:text-2xl drop-shadow-md tracking-tight">
-                      {theme.name}
-                    </h3>
-                    <p className="font-montserrat text-white/75 text-xs sm:text-sm mt-0.5">
-                      Collection {String(i + 1).padStart(2, "0")}
-                    </p>
-                  </div>
-
-                  {/* Play / View circular indicator matching reference */}
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 text-[#143521] flex items-center justify-center shadow-lg text-xs shrink-0 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                    <i className="fa-solid fa-play text-[10px] ml-0.5" aria-hidden="true" />
-                  </div>
-                </div>
               </div>
             );
           })}
