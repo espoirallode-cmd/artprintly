@@ -1,35 +1,22 @@
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
 /**
- * Bento-grid layout — landscape images in wide cells, portrait in tall cells.
- * LANDSCAPE: cat_1–9, cat_13–15  (1024×682 or 1024×768)
- * PORTRAIT : cat_10, cat_11, cat_12 (682×1024)
- *
- * 4-column grid, auto-rows for base height.
- * Each cell specifies col-span + row-span to keep natural proportions.
+ * 12 landscape-only images (cat_10, cat_11, cat_12 — portrait — removed).
+ * Uniform 3-column card grid matching the reference card style.
  */
-const bentoItems = [
-  // Row 1
-  { src: "/cat_1.jpg",  alt: "Botanique",    col: "col-span-2", row: "row-span-1" },
-  { src: "/cat_2.jpg",  alt: "Floral",       col: "col-span-1", row: "row-span-1" },
-  { src: "/cat_10.jpg", alt: "Architecture", col: "col-span-1", row: "row-span-2" }, // portrait → spans rows 1-2
-  // Row 2
-  { src: "/cat_3.jpg",  alt: "Géométrique",  col: "col-span-1", row: "row-span-1" },
-  { src: "/cat_4.jpg",  alt: "Aquarelle",    col: "col-span-2", row: "row-span-1" },
-  // Row 3
-  { src: "/cat_5.jpg",  alt: "Minimaliste",  col: "col-span-1", row: "row-span-1" },
-  { src: "/cat_6.jpg",  alt: "Nature",       col: "col-span-1", row: "row-span-1" },
-  { src: "/cat_11.jpg", alt: "Bohème",       col: "col-span-1", row: "row-span-2" }, // portrait → spans rows 3-4
-  { src: "/cat_7.jpg",  alt: "Animaux",      col: "col-span-1", row: "row-span-1" },
-  // Row 4
-  { src: "/cat_8.jpg",  alt: "Paysage",      col: "col-span-2", row: "row-span-1" },
-  { src: "/cat_12.jpg", alt: "Urbain",       col: "col-span-1", row: "row-span-2" }, // portrait → spans rows 4-5  (goes to col 4)
-  // Row 5
-  { src: "/cat_9.jpg",  alt: "Abstrait",     col: "col-span-1", row: "row-span-1" },
-  { src: "/cat_13.jpg", alt: "Vintage",      col: "col-span-2", row: "row-span-1" },
-  // Row 6
-  { src: "/cat_14.jpg", alt: "Art Déco",     col: "col-span-2", row: "row-span-1" },
-  { src: "/cat_15.jpg", alt: "Contemporain", col: "col-span-2", row: "row-span-1" },
+const landscapeImages = [
+  { src: "/cat_1.jpg",  alt: "Botanique" },
+  { src: "/cat_2.jpg",  alt: "Floral" },
+  { src: "/cat_3.jpg",  alt: "Géométrique" },
+  { src: "/cat_4.jpg",  alt: "Aquarelle" },
+  { src: "/cat_5.jpg",  alt: "Minimaliste" },
+  { src: "/cat_6.jpg",  alt: "Nature" },
+  { src: "/cat_7.jpg",  alt: "Animaux" },
+  { src: "/cat_8.jpg",  alt: "Paysage" },
+  { src: "/cat_9.jpg",  alt: "Abstrait" },
+  { src: "/cat_13.jpg", alt: "Vintage" },
+  { src: "/cat_14.jpg", alt: "Art Déco" },
+  { src: "/cat_15.jpg", alt: "Contemporain" },
 ];
 
 const Catalogue = () => {
@@ -44,28 +31,32 @@ const Catalogue = () => {
             Aperçu de la Collection
           </h2>
           <p className="font-montserrat text-[#143521]/65 mt-3 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            15 univers artistiques — 363 créations haute résolution prêtes à imprimer.
+            12 univers artistiques — 363 créations haute résolution prêtes à imprimer.
           </p>
         </div>
 
-        {/* Bento Grid */}
+        {/* Card Grid — 1 col mobile / 2 col tablet / 3 col desktop */}
         <div
-          className={`grid grid-cols-4 auto-rows-[160px] sm:auto-rows-[190px] md:auto-rows-[220px] gap-2 sm:gap-3 animate-in ${isVisible ? "visible" : ""}`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "150ms" }}
         >
-          {bentoItems.map((item) => (
+          {landscapeImages.map((item, i) => (
             <div
               key={item.src}
-              className={`relative overflow-hidden rounded-2xl sm:rounded-3xl group ${item.col} ${item.row}`}
+              className="group relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-500"
+              style={{ transitionDelay: `${i * 40}ms` }}
             >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                loading="lazy"
-              />
+              {/* Fixed 4:3 aspect ratio matching reference card proportions */}
+              <div className="aspect-[4/3] w-full overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
               {/* Subtle vignette on hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/8 transition-colors duration-500 rounded-2xl sm:rounded-3xl pointer-events-none" />
             </div>
           ))}
         </div>
@@ -88,4 +79,3 @@ const Catalogue = () => {
 };
 
 export default Catalogue;
-
