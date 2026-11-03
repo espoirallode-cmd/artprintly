@@ -1,92 +1,204 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useScrollAnimation } from "@/hooks/useAnimations";
 
 const themes = [
-  { name: "Botanique", color: "from-green-900/60 to-green-800/40", icon: "fa-leaf", image: "/cat_1.jpg" },
-  { name: "Floral", color: "from-rose-900/40 to-green-900/30", icon: "fa-seedling", image: "/cat_2.jpg" },
-  { name: "Géométrique", color: "from-slate-800/60 to-green-900/30", icon: "fa-shapes", image: "/cat_3.jpg" },
-  { name: "Aquarelle", color: "from-sky-900/40 to-green-800/30", icon: "fa-palette", image: "/cat_4.jpg" },
-  { name: "Minimaliste", color: "from-neutral-800/60 to-neutral-700/40", icon: "fa-minus", image: "/cat_5.jpg" },
-  { name: "Nature", color: "from-emerald-900/50 to-green-900/40", icon: "fa-tree", image: "/cat_6.jpg" },
-  { name: "Animaux", color: "from-orange-900/40 to-amber-900/30", icon: "fa-paw", image: "/cat_7.jpg" },
-  { name: "Paysage", color: "from-blue-900/50 to-indigo-900/30", icon: "fa-mountain", image: "/cat_8.jpg" },
-  { name: "Abstrait", color: "from-purple-900/40 to-pink-900/30", icon: "fa-brush", image: "/cat_9.jpg" },
-  { name: "Architecture", color: "from-zinc-900/60 to-slate-900/40", icon: "fa-building-columns", image: "/cat_10.jpg" },
-  { name: "Bohème", color: "from-yellow-900/40 to-orange-900/30", icon: "fa-sun", image: "/cat_11.jpg" },
-  { name: "Urbain", color: "from-gray-900/60 to-slate-900/50", icon: "fa-city", image: "/cat_12.jpg" },
-  { name: "Vintage", color: "from-amber-900/50 to-stone-900/40", icon: "fa-clock-rotate-left", image: "/cat_13.jpg" },
-  { name: "Art Déco", color: "from-yellow-900/60 to-amber-900/40", icon: "fa-gem", image: "/cat_14.jpg" },
-  { name: "Contemporain", color: "from-zinc-800 to-slate-900", icon: "fa-palette", image: "/cat_15.jpg" },
+  { name: "Botanique", image: "/cat_1.jpg", tag: "363 motifs" },
+  { name: "Floral", image: "/cat_2.jpg", tag: "363 motifs" },
+  { name: "Géométrique", image: "/cat_3.jpg", tag: "363 motifs" },
+  { name: "Aquarelle", image: "/cat_4.jpg", tag: "363 motifs" },
+  { name: "Minimaliste", image: "/cat_5.jpg", tag: "363 motifs" },
+  { name: "Nature", image: "/cat_6.jpg", tag: "363 motifs" },
+  { name: "Animaux", image: "/cat_7.jpg", tag: "363 motifs" },
+  { name: "Paysage", image: "/cat_8.jpg", tag: "363 motifs" },
+  { name: "Abstrait", image: "/cat_9.jpg", tag: "363 motifs" },
+  { name: "Architecture", image: "/cat_10.jpg", tag: "363 motifs" },
+  { name: "Bohème", image: "/cat_11.jpg", tag: "363 motifs" },
+  { name: "Urbain", image: "/cat_12.jpg", tag: "363 motifs" },
+  { name: "Vintage", image: "/cat_13.jpg", tag: "363 motifs" },
+  { name: "Art Déco", image: "/cat_14.jpg", tag: "363 motifs" },
+  { name: "Contemporain", image: "/cat_15.jpg", tag: "363 motifs" },
 ];
 
 const Catalogue = () => {
   const { ref, isVisible } = useScrollAnimation(0.15);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(2);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  const displayedThemes = isExpanded ? themes : themes.slice(0, 6);
+  const total = themes.length;
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
+  }, [total]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+  }, [total]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handlePrev, handleNext]);
+
+  // Touch swipe support
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 45) {
+      handleNext();
+    } else if (distance < -45) {
+      handlePrev();
+    }
+    setTouchStart(null);
+  };
 
   return (
-    <section id="catalogue" className="bg-transparent py-20 md:py-28" ref={ref}>
-      <div className="container mx-auto px-6">
-        <div className={`text-center mb-14 animate-in ${isVisible ? "visible" : ""}`}>
-          <h2 className="font-outfit font-bold text-[#143521] text-3xl md:text-4xl text-balance">
+    <section id="catalogue" className="bg-transparent py-20 md:py-28 overflow-hidden" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className={`text-center mb-10 sm:mb-14 animate-in ${isVisible ? "visible" : ""}`}>
+          <h2 className="font-outfit font-bold text-[#143521] text-3xl md:text-5xl text-balance">
             Aperçu de la Collection
           </h2>
-          <p className="font-montserrat text-[#143521]/65 mt-3 max-w-2xl mx-auto">
-            Quelques motifs de notre collection premium — 363 créations vous attendent.
+          <p className="font-montserrat text-[#143521]/65 mt-3 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+            15 univers artistiques — 363 créations haute résolution prêtes à imprimer.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedThemes.map((t, i) => {
-            const verticalThemes = ["Architecture", "Bohème", "Urbain"];
-            const isVertical = verticalThemes.includes(t.name);
+        {/* 3D Coverflow Carousel Container */}
+        <div
+          className={`relative w-full max-w-6xl mx-auto h-[340px] sm:h-[450px] md:h-[520px] flex items-center justify-center select-none overflow-hidden animate-in ${isVisible ? "visible" : ""}`}
+          style={{ transitionDelay: "200ms" }}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          {themes.map((theme, i) => {
+            let diff = (i - currentIndex) % total;
+            if (diff > total / 2) diff -= total;
+            if (diff < -total / 2) diff += total;
+
+            const absDiff = Math.abs(diff);
+
+            // Hide cards beyond visible 3D coverflow range
+            if (absDiff > 3) {
+              return null;
+            }
+
+            let scale = 1;
+            let opacity = 1;
+            let brightness = 1;
+            const zIndex = 50 - absDiff * 10;
+
+            if (diff === 0) {
+              scale = 1;
+              opacity = 1;
+              brightness = 1;
+            } else if (absDiff === 1) {
+              scale = 0.88;
+              opacity = 0.85;
+              brightness = 0.82;
+            } else if (absDiff === 2) {
+              scale = 0.74;
+              opacity = 0.6;
+              brightness = 0.68;
+            } else if (absDiff === 3) {
+              scale = 0.6;
+              opacity = 0.25;
+              brightness = 0.5;
+            }
+
+            const isCenter = diff === 0;
+
             return (
               <div
-                key={t.name}
-                className={`group relative ${isVertical ? "aspect-[3/4]" : "aspect-[4/3]"} rounded-2xl overflow-hidden shadow-lg shadow-emerald-950/10 cursor-pointer
-                  border border-white/60 hover:border-brand-green transition-all duration-500
-                  animate-in ${isVisible ? "visible" : ""}`}
-                style={{ transitionDelay: `${(i % 6) * 100 + 200}ms` }}
+                key={theme.name}
+                onClick={() => !isCenter && setCurrentIndex(i)}
+                className="coverflow-card w-[210px] sm:w-[280px] md:w-[330px] lg:w-[350px] h-[280px] sm:h-[380px] md:h-[450px] lg:h-[480px] rounded-3xl sm:rounded-[2.25rem] overflow-hidden shadow-[0_20px_50px_rgba(20,50,30,0.22)] cursor-pointer group"
+                style={{
+                  "--diff": diff,
+                  "--scale": scale,
+                  "--opacity": opacity,
+                  "--brightness": brightness,
+                  zIndex,
+                } as React.CSSProperties}
               >
-              <div className={`absolute inset-0 bg-gradient-to-br ${t.color} transition-transform duration-700 ease-out`}>
-                {t.image ? (
-                  <img 
-                    src={t.image} 
-                    alt={t.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <i className={`fa-solid ${t.icon} text-brand-green/20 text-6xl`} aria-hidden="true" />
+                {/* Image */}
+                <img
+                  src={theme.image}
+                  alt={theme.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+
+                {/* Subtle bottom shadow overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent pointer-events-none" />
+
+                {/* Card footer details */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 flex items-end justify-between z-10">
+                  <div>
+                    <h3 className="font-outfit font-bold text-white text-lg sm:text-2xl drop-shadow-md tracking-tight">
+                      {theme.name}
+                    </h3>
+                    <p className="font-montserrat text-white/75 text-xs sm:text-sm mt-0.5">
+                      Collection {String(i + 1).padStart(2, "0")}
+                    </p>
                   </div>
-                )}
-                <div className={`absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500`} />
+
+                  {/* Play / View circular indicator matching reference */}
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 text-[#143521] flex items-center justify-center shadow-lg text-xs shrink-0 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                    <i className="fa-solid fa-play text-[10px] ml-0.5" aria-hidden="true" />
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-        {isExpanded && (
-          <div className="flex justify-center mt-16 animate-in visible">
-            <p className="font-montserrat text-brand-green font-medium italic text-lg text-center border-t border-brand-green/20 pt-10 px-6 max-w-2xl">
-              Voir le reste des motifs dans le pack
-            </p>
-          </div>
-        )}
+        {/* Carousel Navigation Buttons Below (matching reference exactly) */}
+        <div className="flex items-center justify-center gap-4 mt-8 sm:mt-10">
+          <button
+            onClick={handlePrev}
+            className="w-12 h-12 rounded-full border border-[#143521]/30 hover:border-[#143521] hover:bg-[#143521] hover:text-white text-[#143521] flex items-center justify-center transition-all duration-300 shadow-sm active:scale-95 cursor-pointer bg-white/70 backdrop-blur-md"
+            aria-label="Motif précédent"
+          >
+            <i className="fa-solid fa-arrow-left text-sm" aria-hidden="true" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="w-12 h-12 rounded-full border border-[#143521]/30 hover:border-[#143521] hover:bg-[#143521] hover:text-white text-[#143521] flex items-center justify-center transition-all duration-300 shadow-sm active:scale-95 cursor-pointer bg-white/70 backdrop-blur-md"
+            aria-label="Motif suivant"
+          >
+            <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
+          </button>
+        </div>
 
-        {!isExpanded && (
-          <div className="flex justify-center">
-            <button 
-              onClick={() => setIsExpanded(true)}
-              className={`mt-10 inline-flex items-center gap-2 bg-white/80 border border-white/90 backdrop-blur-md px-8 py-3.5 rounded-2xl font-montserrat text-brand-green font-semibold cursor-pointer hover:bg-white hover:border-white transition-all shadow-md animate-in ${isVisible ? "visible" : ""}`}
-              style={{ transitionDelay: "400ms" }}
+        {/* Active Theme Indicator & Link to pack */}
+        <div className="text-center mt-4">
+          <p className="font-montserrat text-[#143521]/60 text-xs sm:text-sm tracking-widest font-semibold uppercase">
+            {String(currentIndex + 1).padStart(2, "0")} / {String(themes.length).padStart(2, "0")} — {themes[currentIndex].name}
+          </p>
+
+          <div className="mt-6 flex justify-center">
+            <a
+              href="https://marcshopbusiness.mychariow.shop"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pulse-cta inline-flex items-center gap-2.5 bg-brand-green hover:brightness-110 text-white font-montserrat font-semibold px-7 py-3 rounded-full text-xs sm:text-sm shadow-lg shadow-brand-green/20 transition-all active:scale-95"
             >
-              Voir plus
-            </button>
+              <i className="fa-solid fa-bag-shopping text-sm" aria-hidden="true" />
+              Obtenir les 363 motifs — 50€
+            </a>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

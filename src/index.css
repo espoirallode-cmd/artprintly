@@ -115,6 +115,32 @@
     transform: translateY(-16px) scale(1.08) rotate(0deg) !important;
   }
 
+  /* 3D Coverflow Carousel */
+  .coverflow-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% + (var(--diff) * 58%)), -50%) scale(var(--scale));
+    opacity: var(--opacity);
+    filter: brightness(var(--brightness));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
+  }
+
+  @media (min-width: 640px) {
+    .coverflow-card {
+      transform: translate(calc(-50% + (var(--diff) * 75%)), -50%) scale(var(--scale));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .coverflow-card {
+      transform: translate(calc(-50% + (var(--diff) * 82%)), -50%) scale(var(--scale));
+    }
+  }
+
   .nav-link {
     @apply relative;
   }
