@@ -8,6 +8,8 @@ const cardsData = [
     alt: "Étudiante avec casque qui écrit à son bureau",
     rotate: -9,
     translateY: 12,
+    mobileRotate: -7,
+    mobileTranslateY: 6,
     zIndex: 10,
   },
   {
@@ -16,6 +18,8 @@ const cardsData = [
     alt: "Carnet de notes, tasse de café et plante",
     rotate: -3,
     translateY: 0,
+    mobileRotate: 0,
+    mobileTranslateY: 0,
     zIndex: 20,
   },
   {
@@ -24,6 +28,8 @@ const cardsData = [
     alt: "Personne assise contemplant un lac de montagne",
     rotate: 3,
     translateY: 4,
+    mobileRotate: 7,
+    mobileTranslateY: 6,
     zIndex: 30,
   },
   {
@@ -32,6 +38,8 @@ const cardsData = [
     alt: "Cycliste sur route de montagne au coucher du soleil",
     rotate: 9,
     translateY: 16,
+    mobileRotate: 0,
+    mobileTranslateY: 0,
     zIndex: 20,
   },
 ];
@@ -53,7 +61,7 @@ const Hero = () => {
           </h1>
         </div>
 
-        {/* 4 Cards Deck Layout Matching Exactly The Reference Design */}
+        {/* Cards Deck Layout: 3 cards on mobile, 4 cards on desktop */}
         <div 
           className={`w-full max-w-5xl mx-auto my-8 sm:my-16 md:my-20 px-2 sm:px-6 flex justify-center items-center animate-in ${isVisible ? "visible" : ""}`}
           style={{ transitionDelay: "200ms" }}
@@ -62,24 +70,28 @@ const Hero = () => {
             <div className="flex items-center justify-center min-w-0 sm:min-w-[760px] md:min-w-[880px] lg:min-w-0">
               {cardsData.map((card, index) => {
                 const isHovered = hoveredId === card.id;
+                const isHiddenOnMobile = card.id === 4;
                 return (
                   <div
                     key={card.id}
                     onMouseEnter={() => setHoveredId(card.id)}
                     onMouseLeave={() => setHoveredId(null)}
-                    className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group ${
-                      index === 0 ? "ml-0" : "-ml-5 sm:-ml-12 md:-ml-16 lg:-ml-20"
+                    className={`relative shrink-0 cursor-pointer transition-all duration-300 ease-out group hero-card ${
+                      isHiddenOnMobile ? "hidden sm:block" : "block"
+                    } ${
+                      index === 0 ? "ml-0" : "-ml-6 sm:-ml-12 md:-ml-16 lg:-ml-20"
                     }`}
                     style={{
-                      transform: isHovered
-                        ? "translateY(-16px) scale(1.08) rotate(0deg)"
-                        : `translateY(${card.translateY}px) rotate(${card.rotate}deg)`,
+                      "--desk-rot": `${card.rotate}deg`,
+                      "--desk-ty": `${card.translateY}px`,
+                      "--mob-rot": `${card.mobileRotate}deg`,
+                      "--mob-ty": `${card.mobileTranslateY}px`,
                       zIndex: isHovered ? 60 : card.zIndex,
-                    }}
+                    } as React.CSSProperties}
                   >
 
                     {/* Card Body - Rounded with thick white border and soft shadow */}
-                    <div className="w-[5.25rem] h-24 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-2xl sm:rounded-[2.5rem] overflow-hidden border-2 sm:border-[4.5px] border-white bg-white shadow-[0_12px_28px_-6px_rgba(20,50,30,0.20),0_6px_16px_-4px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
+                    <div className="w-24 h-28 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-64 lg:h-68 rounded-2xl sm:rounded-[2.5rem] overflow-hidden border-2 sm:border-[4.5px] border-white bg-white shadow-[0_12px_28px_-6px_rgba(20,50,30,0.20),0_6px_16px_-4px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover:shadow-[0_32px_65px_-12px_rgba(0,0,0,0.32)]">
                       <img
                         src={card.image}
                         alt={card.alt}

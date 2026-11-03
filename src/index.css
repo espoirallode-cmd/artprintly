@@ -103,6 +103,18 @@
     animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  .hero-card {
+    transform: translateY(var(--mob-ty, 0px)) rotate(var(--mob-rot, 0deg));
+  }
+  @media (min-width: 640px) {
+    .hero-card {
+      transform: translateY(var(--desk-ty, 0px)) rotate(var(--desk-rot, 0deg));
+    }
+  }
+  .hero-card:hover {
+    transform: translateY(-16px) scale(1.08) rotate(0deg) !important;
+  }
+
   .nav-link {
     @apply relative;
   }
